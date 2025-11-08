@@ -7,13 +7,27 @@ import { Plus, Check, Droplets, Sun, Thermometer, Sprout } from 'lucide-react';
 
 interface PlantCardProps {
   plant: any;
-  onAdd: () => void;
+  onAddPlant?: () => void;
+  onAdd?: () => void;
   isAdded: boolean;
   showReminder?: boolean;
+  showRemoveButton?: boolean;
   onRemove?: () => void;
+  onRemovePlant?: () => void;
 }
 
-export function PlantCard({ plant, onAdd, isAdded, showReminder, onRemove }: PlantCardProps) {
+export function PlantCard({ 
+  plant, 
+  onAddPlant, 
+  onAdd, 
+  isAdded, 
+  showReminder, 
+  showRemoveButton,
+  onRemove, 
+  onRemovePlant 
+}: PlantCardProps) {
+  const handleAdd = onAddPlant || onAdd || (() => {});
+  const handleRemove = onRemovePlant || onRemove || (() => {});
   const { t, language } = useLanguage();
 
   const imageUrl = plant.imgurl || plant.image || `https://source.unsplash.com/400x300/?plant,${plant.Type}`;
@@ -100,9 +114,9 @@ export function PlantCard({ plant, onAdd, isAdded, showReminder, onRemove }: Pla
         )}
 
         <div className="flex gap-2">
-          {!showReminder && (
+          {!showReminder && !showRemoveButton && (
             <Button
-              onClick={onAdd}
+              onClick={handleAdd}
               disabled={isAdded}
               className={`flex-1 rounded-lg ${
                 isAdded
@@ -124,9 +138,9 @@ export function PlantCard({ plant, onAdd, isAdded, showReminder, onRemove }: Pla
             </Button>
           )}
 
-          {showReminder && onRemove && (
+          {(showReminder || showRemoveButton) && (
             <Button
-              onClick={onRemove}
+              onClick={handleRemove}
               variant="destructive"
               className="flex-1 rounded-lg"
             >

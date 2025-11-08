@@ -54,7 +54,6 @@
     --color-gray-50: oklch(.985 .002 247.839);
     --color-gray-100: oklch(.967 .003 264.542);
     --color-gray-200: oklch(.928 .006 264.531);
-    --color-gray-300: oklch(.872 .01 258.338);
     --color-gray-500: oklch(.551 .027 264.364);
     --color-gray-600: oklch(.446 .03 256.802);
     --color-gray-700: oklch(.373 .034 259.733);
@@ -76,6 +75,8 @@
     --text-xl: 1.25rem;
     --text-2xl: 1.5rem;
     --text-2xl--line-height: calc(2 / 1.5);
+    --text-6xl: 3.75rem;
+    --text-6xl--line-height: 1;
     --font-weight-normal: 400;
     --font-weight-medium: 500;
     --leading-relaxed: 1.625;
@@ -1125,6 +1126,11 @@
     line-height: var(--tw-leading, var(--text-2xl--line-height));
   }
 
+  .text-6xl {
+    font-size: var(--text-6xl);
+    line-height: var(--tw-leading, var(--text-6xl--line-height));
+  }
+
   .text-base {
     font-size: var(--text-base);
     line-height: var(--tw-leading, var(--text-base--line-height));
@@ -1177,10 +1183,6 @@
 
   .text-foreground {
     color: var(--foreground);
-  }
-
-  .text-gray-300 {
-    color: var(--color-gray-300);
   }
 
   .text-gray-500 {

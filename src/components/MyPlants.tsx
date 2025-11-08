@@ -1,6 +1,5 @@
 import { useLanguage } from './LanguageContext';
 import { PlantCard } from './PlantCard';
-import { Sprout } from 'lucide-react';
 
 interface MyPlantsProps {
   plants: any[];
@@ -8,33 +7,31 @@ interface MyPlantsProps {
 }
 
 export function MyPlants({ plants, onRemovePlant }: MyPlantsProps) {
-  const { t } = useLanguage();
+  const { t, language } = useLanguage();
 
   return (
-    <div className="container mx-auto px-4 py-8">
-      <div className="text-center mb-8">
-        <h2 className="text-gray-800 mb-2">
-          {t('نباتاتي', 'My Plants')}
-        </h2>
-        <p className="text-gray-600">
-          {t('اعتنِ بنباتاتك مع تذكيرات الري اليومية', 'Care for your plants with daily watering reminders')}
-        </p>
-      </div>
+    <div className="container mx-auto px-4 py-12">
+      <h1 className="text-center text-[#7BAE7F] mb-8">
+        {t('نباتاتي', 'My Plants')}
+      </h1>
 
       {plants.length === 0 ? (
         <div className="text-center py-16">
-          <Sprout className="w-16 h-16 text-gray-300 mx-auto mb-4" />
+          <div className="text-6xl mb-4">🌿</div>
           <h3 className="text-gray-600 mb-2">
             {t('لم تضف أي نباتات بعد', 'No plants added yet')}
           </h3>
           <p className="text-gray-500">
-            {t('ابدأ بإضافة نباتات من صفحة التوصيات الذكية', 'Start by adding plants from the Smart Recommendations page')}
+            {t('ابدأ بإضافة نباتات من صفحة التوصيات الذكية', 'Start adding plants from Smart Recommendations page')}
           </p>
         </div>
       ) : (
         <>
-          <div className="mb-4 text-gray-600 text-center">
-            {t(`لديك ${plants.length} نبات`, `You have ${plants.length} plants`)}
+          <div className="mb-6 text-gray-600 text-center">
+            {t(
+              `لديك ${plants.length} نبات${plants.length > 1 ? 'ات' : ''}`,
+              `You have ${plants.length} plant${plants.length !== 1 ? 's' : ''}`
+            )}
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
@@ -42,10 +39,10 @@ export function MyPlants({ plants, onRemovePlant }: MyPlantsProps) {
               <PlantCard
                 key={plant.id}
                 plant={plant}
-                onAdd={() => {}}
+                onAddPlant={() => {}}
+                onRemovePlant={() => onRemovePlant(plant.id)}
                 isAdded={true}
-                showReminder={true}
-                onRemove={() => onRemovePlant(plant.id)}
+                showRemoveButton={true}
               />
             ))}
           </div>
